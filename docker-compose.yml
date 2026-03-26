@@ -1,0 +1,11 @@
+services:
+  sadtalker:
+    build: .
+    container_name: echo-sadtalker
+    ports:
+      - "7862:7862"
+    volumes:
+      - ./checkpoints:/app/checkpoints
+      - ./gfpgan_weights:/app/gfpgan/weights
+      - ./results:/app/results
+    restart: unless-stopped
