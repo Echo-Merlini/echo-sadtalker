@@ -37,12 +37,12 @@ def sadtalker_demo(checkpoint_path='checkpoints', config_path='src/config', warp
                 with gr.Tabs(elem_id="sadtalker_source_image"):
                     with gr.TabItem('Upload image'):
                         with gr.Row():
-                            source_image = gr.Image(label="Source image", source="upload", type="filepath", elem_id="img2img_image")
+                            source_image = gr.Image(label="Source image", type="filepath", elem_id="img2img_image")
 
                 with gr.Tabs(elem_id="sadtalker_driven_audio"):
                     with gr.TabItem('Upload OR TTS'):
                         with gr.Column(variant='panel'):
-                            driven_audio = gr.Audio(label="Input audio", source="upload", type="filepath")
+                            driven_audio = gr.Audio(label="Input audio", type="filepath")
 
                         if False:  # TTS disabled (not compatible with Python 3.12)
                             from src.utils.text2speech import TTSTalker
