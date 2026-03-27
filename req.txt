@@ -17,7 +17,6 @@ scikit-image==0.19.3
 basicsr==1.4.2
 facexlib==0.3.0
 gradio==3.41.2
-jinja2==3.0.3
 gfpgan
 av
 safetensors
