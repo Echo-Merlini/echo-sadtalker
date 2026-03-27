@@ -1,11 +1,22 @@
 services:
   sadtalker:
     build: .
-    container_name: echo-sadtalker
-    ports:
-      - "7862:7862"
+    networks:
+      - coolify
     volumes:
       - /volume1/docker/ECHO/data/sadtalker/checkpoints:/app/checkpoints
       - /volume1/docker/ECHO/data/sadtalker/gfpgan_weights:/app/gfpgan/weights
       - /volume1/docker/ECHO/data/sadtalker/results:/app/results
+    labels:
+      - traefik.enable=true
+      - traefik.http.middlewares.gzip.compress=true
+      - traefik.http.routers.http-0-m8ar87l5fm73bg6rhe5lql8x.entryPoints=http
+      - traefik.http.routers.http-0-m8ar87l5fm73bg6rhe5lql8x.middlewares=gzip
+      - "traefik.http.routers.http-0-m8ar87l5fm73bg6rhe5lql8x.rule=Host(`m8ar87l5fm73bg6rhe5lql8x.192.168.68.52.sslip.io`) && PathPrefix(`/`)"
+      - traefik.http.routers.http-0-m8ar87l5fm73bg6rhe5lql8x.service=http-0-m8ar87l5fm73bg6rhe5lql8x
+      - traefik.http.services.http-0-m8ar87l5fm73bg6rhe5lql8x.loadbalancer.server.port=7862
     restart: unless-stopped
+
+networks:
+  coolify:
+    external: true
