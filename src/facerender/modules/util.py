@@ -32,13 +32,23 @@ def kp2gaussian(kp, spatial_size, kp_variance):
 
     return out
 
+def _type_to_device(type_str):
+    type_str = str(type_str)
+    if 'cuda' in type_str:
+        return 'cuda'
+    elif 'mps' in type_str:
+        return 'mps'
+    return 'cpu'
+
+
 def make_coordinate_grid_2d(spatial_size, type):
     """
     Create a meshgrid [-1,1] x [-1,1] of given spatial_size.
     """
     h, w = spatial_size
-    x = torch.arange(w).type(type)
-    y = torch.arange(h).type(type)
+    device = _type_to_device(type)
+    x = torch.arange(w, dtype=torch.float32, device=device)
+    y = torch.arange(h, dtype=torch.float32, device=device)
 
     x = (2 * (x / (w - 1)) - 1)
     y = (2 * (y / (h - 1)) - 1)
@@ -53,9 +63,10 @@ def make_coordinate_grid_2d(spatial_size, type):
 
 def make_coordinate_grid(spatial_size, type):
     d, h, w = spatial_size
-    x = torch.arange(w).type(type)
-    y = torch.arange(h).type(type)
-    z = torch.arange(d).type(type)
+    device = _type_to_device(type)
+    x = torch.arange(w, dtype=torch.float32, device=device)
+    y = torch.arange(h, dtype=torch.float32, device=device)
+    z = torch.arange(d, dtype=torch.float32, device=device)
 
     x = (2 * (x / (w - 1)) - 1)
     y = (2 * (y / (h - 1)) - 1)

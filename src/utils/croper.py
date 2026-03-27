@@ -24,8 +24,10 @@ class Preprocesser:
         """get landmark with dlib
         :return: np.array shape=(68, 2)
         """
+        # RetinaFace expects BGR; img_np comes in RGB from preprocess.py
+        img_bgr = img_np[:, :, ::-1].copy()
         with torch.no_grad():
-            dets = self.predictor.det_net.detect_faces(img_np, 0.5)
+            dets = self.predictor.det_net.detect_faces(img_bgr, 0.5)
 
         if len(dets) == 0:
             return None
