@@ -5,7 +5,7 @@ services:
     ports:
       - "7862:7862"
     volumes:
-      - ./checkpoints:/app/checkpoints
-      - ./gfpgan_weights:/app/gfpgan/weights
-      - ./results:/app/results
+      - /volume1/docker/ECHO/data/sadtalker/checkpoints:/app/checkpoints
+      - /volume1/docker/ECHO/data/sadtalker/gfpgan_weights:/app/gfpgan/weights
+      - /volume1/docker/ECHO/data/sadtalker/results:/app/results
     restart: unless-stopped
