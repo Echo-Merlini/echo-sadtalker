@@ -2,15 +2,15 @@
 
 SadTalker talking photo service — animates a still portrait photo with audio to produce a lip-synced video.
 
-Running on the Mac mini (Echo) with Apple Silicon MPS acceleration, accessible from the NAS network via Traefik.
+Running on a Mac mini with Apple Silicon MPS acceleration, accessible on the local network via Traefik.
 
 ## Architecture
 
 ```
-Browser / NAS apps
+Browser / other services
       │
       ▼
-Traefik (NAS) → sadtalker.192.168.68.52.sslip.io:8090
+Traefik (reverse proxy, local network)
       │
       ▼
 Gradio UI (Mac mini :7863) — app_sadtalker.py
@@ -38,17 +38,17 @@ Speed: ~1 second per video frame at MPS, batch_size=1.
 ## Access
 
 - **Local:** `http://localhost:7863`
-- **Network (via Traefik on NAS):** `http://sadtalker.192.168.68.52.sslip.io:8090`
+- **Network (via Traefik on NAS):** configured via Traefik reverse proxy on local network
 
 ## Auto-start (LaunchAgent)
 
 The service is managed by a macOS LaunchAgent and starts automatically on login:
 
 ```
-/Users/merliniferrao/Library/LaunchAgents/com.echo.sadtalker.plist
+~/Library/LaunchAgents/com.echo.sadtalker.plist
 ```
 
-Logs: `/Users/merliniferrao/sadtalker/sadtalker.log`
+Logs: `~/sadtalker/sadtalker.log`
 
 Restart manually:
 ```bash
