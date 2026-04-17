@@ -14,7 +14,7 @@ services:
       - traefik.http.routers.http-0-m8ar87l5fm73bg6rhe5lql8x.middlewares=gzip
       - "traefik.http.routers.http-0-m8ar87l5fm73bg6rhe5lql8x.rule=Host(`m8ar87l5fm73bg6rhe5lql8x.192.168.68.52.sslip.io`) && PathPrefix(`/`)"
       - traefik.http.routers.http-0-m8ar87l5fm73bg6rhe5lql8x.service=http-0-m8ar87l5fm73bg6rhe5lql8x
-      - traefik.http.services.http-0-m8ar87l5fm73bg6rhe5lql8x.loadbalancer.server.port=7862
+      - traefik.http.services.http-0-m8ar87l5fm73bg6rhe5lql8x.loadbalancer.server.port=7863
     restart: unless-stopped
 
 networks:
